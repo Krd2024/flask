@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # Строим новый Docker-образ
-docker build -t my-flask-app .
+docker build -t flask_web .
 
 # Останавливаем и удаляем предыдущий контейнер, если он запущен
-docker stop flask-app || true
-docker rm flask-app || true
+docker stop flask_web_1 || true
+docker rm flask_web_1 || true
 
 # Запускаем новый контейнер
-docker run -d --name flask-app -p 5000:5000 my-flask-app
+docker run -d --name flask_web_1 -p 5000:5000 flask_web 
 
 echo "Flask приложение обновлено и запущено на http://localhost:5000"
