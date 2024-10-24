@@ -1,4 +1,4 @@
-version: 'python:3.10.15-slim'
+version: 'python: 3.12.7-slim'
 
 services:
   web:  # Убедитесь, что это имя сервиса, которое вы будете использовать

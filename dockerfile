@@ -1,6 +1,6 @@
 # Используем официальный базовый образ Ubuntu
 # FROM ubuntu:latest
-FROM python:3.10.15-slim
+FROM python:3.12.7-slim
 # Обновляем пакеты и устанавливаем Python3 и pip
 RUN apt-get update && apt-get install -y python3 python3-pip 
 
