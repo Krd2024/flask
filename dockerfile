@@ -1,6 +1,6 @@
 # Используем официальный базовый образ Ubuntu
 # FROM ubuntu:latest
-FROM python:3.11
+FROM python:3.10
 # Обновляем пакеты и устанавливаем Python3 и pip
 RUN apt-get update && apt-get install -y python3 python3-pip 
 
