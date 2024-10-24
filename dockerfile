@@ -25,7 +25,7 @@ COPY . /opt
 EXPOSE 5000
 
 # Команда для запуска Flask-приложения
-ENTRYPOINT ["waitress-serve", "--listen=0.0.0.0:5000", "app:app"]
+ENTRYPOINT ["waitress-serve", "--listen=0.0.0.0:5000", "main:app"]
 
 
 # Устанавливаем переменную окружения
