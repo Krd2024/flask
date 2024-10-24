@@ -1,4 +1,4 @@
-version: 'python:3.9-alpine3.19'
+version: 'python: 3.11.10'
 
 services:
   web:  # Убедитесь, что это имя сервиса, которое вы будете использовать
