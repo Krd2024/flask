@@ -1,24 +1,19 @@
-name: CI
+#!/bin/bash
 
-on: 
-  push:
-    branches: 
-      - main  # или другая ветка, по которой вы хотите запускать процесс
-  pull_request:
+# Остановить текущий контейнер
+if [ "$(docker ps -q -f name=flask_web_1)" ]; then
+    echo "Stopping the flask_web container..."
+    docker stop flask_web_1 || true
+fi
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+# Удалить текущий контейнер
+if [ "$(docker ps -aq -f status=exited -f name=flask_web_1)" ]; then
+    echo "Removing the flask_web container..."
+    docker rm flask_web_1 || true
+fi
 
-    steps:
-      - name: Проверка исходного кода
-        uses: actions/checkout@v2
+# Пересобрать и запустить образ с помощью docker-compose
+echo "Building and starting the container..."
+docker-compose up -d --build
 
-      - name: Установка зависимостей
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-
-      - name: Запуск тестов
-        run: |
-          pytest
+echo "Flask приложение обновлено и доступно по адресу http://localhost:5000"

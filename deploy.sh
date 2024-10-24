@@ -1,13 +1,12 @@
 #!/bin/bash
 
-# Строим новый Docker-образ
-docker build -t flask_web .
-
-# Останавливаем и удаляем предыдущий контейнер, если он запущен
+# Остановить текущий контейнер
 docker stop flask_web_1 || true
+
+# Удалить текущий контейнер
 docker rm flask_web_1 || true
 
-# Запускаем новый контейнер
-docker run -d --name flask_web_1 -p 5000:5000 flask_web 
+# Пересобрать образ
+docker-compose up -d --build
 
-echo "Flask приложение обновлено и запущено на http://localhost:5000"
+echo "Flask приложение обновлено и на http://localhost:5000"
