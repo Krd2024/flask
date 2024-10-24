@@ -1,7 +1,5 @@
-# from flask import Flask
-from flask import Flask, abort, jsonify, request
+from flask import abort, jsonify, request
 import flask
-import requests
 
 app = flask.Flask(__name__)
 
@@ -44,12 +42,16 @@ def get_tasks():
 
 
 # Получение задачи по id
+
+
 @app.route("/todo/api/v1.0/tasks/<int:task_id>", methods=["GET"])
 def get_task(task_id):
-    task = filter(lambda t: t["id"] == task_id, tasks)
+    task = list(
+        filter(lambda t: t["id"] == task_id, tasks)
+    )  # Преобразуем filter в список
     if len(task) == 0:
-        abort(404)
-    return jsonify({"task": task[0]})
+        abort(404)  # Если задача не найдена, возвращаем 404 ошибку
+    return jsonify({"task": task[0]})  # Возвращаем первую найденную задачу
 
 
 # Создание новой задачи
@@ -75,7 +77,7 @@ def update_task(task_id):
         abort(404)
     if not request.json:
         abort(400)
-    if "title" in request.json and type(request.json["title"]) != str:
+    if "title" in request.json and type(request.json["title"]) != str:  # noqa
         abort(400)
     if "description" in request.json and type(request.json["description"]) is not str:
         abort(400)
@@ -118,4 +120,4 @@ if __name__ == "__main__":
 #     app.run()
 
 # waitress-serve --listen=127.0.0.1:5000 main:app
-# waitress-serve --listen=127.0.0.1:5000 --reload main:app
+# FLASK_APP=main:app flask run --reload --host=127.0.0.1 --port=5000
