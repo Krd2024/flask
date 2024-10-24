@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile  # Убедитесь, что указано имя вашего Dockerfile
+    ports:
+      - "5000:5000"  # Связываем порт контейнера с портом хоста
+    restart: unless-stopped  # Перезапуск контейнера в случае его завершения
